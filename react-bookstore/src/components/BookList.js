@@ -22,7 +22,7 @@ function BookList() {
       });
   };
 
-  const handleCreateBook = () => {
+  const addBook = () => {
     axios
       .post("http://localhost:8080/api/books", newBook)
       .then(() => {
@@ -34,7 +34,7 @@ function BookList() {
       });
   };
 
-  const handleUpdateBook = (id) => {
+  const updateBook = (id) => {
     axios
       .put(`http://localhost:8080/api/books/${id}`, updateDetails)
       .then(() => {
@@ -47,7 +47,7 @@ function BookList() {
       });
   };
 
-  const handleDeleteBook = (id) => {
+  const deleteBook = (id) => {
     axios
       .delete(`http://localhost:8080/api/books/${id}`)
       .then(() => {
@@ -66,7 +66,7 @@ function BookList() {
           <li key={book.id}>
             {book.title} by {book.author}
             <button onClick={() => setEditBook(book)}>Edit</button>
-            <button onClick={() => handleDeleteBook(book.id)}>Delete</button>
+            <button onClick={() => deleteBook(book.id)}>Delete</button>
           </li>
         ))}
       </ul>
@@ -84,7 +84,7 @@ function BookList() {
         value={newBook.author}
         onChange={(e) => setNewBook({ ...newBook, author: e.target.value })}
       />
-      <button onClick={handleCreateBook}>Add Book</button>
+      <button onClick={addBook}>Add Book</button>
 
       {editBook && (
         <div>
@@ -101,7 +101,7 @@ function BookList() {
             value={updateDetails.author}
             onChange={(e) => setUpdateDetails({ ...updateDetails, author: e.target.value })}
           />
-          <button onClick={() => handleUpdateBook(editBook.id)}>Update Book</button>
+          <button onClick={() => updateBook(editBook.id)}>Update Book</button>
         </div>
       )}
     </div>
